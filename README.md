@@ -1,6 +1,6 @@
 # CHIRIMEN for Raspberry Pi 3 チュートリアル 6. ステッピングモーター編
 
-*** <font color="red">このチュートリアルで使用しているステッピングモータードライバは CHIRIMEN の公式リリースにまだ含まれていないかも知れません。Example 等がリンクエラーになる場合は、公式リリースまでしばらくお待ちください。</font> ***
+<font color="red"> *このチュートリアルで使用しているステッピングモータードライバは CHIRIMEN の公式リリースにまだ含まれていないかも知れません。Example 等がリンクエラーになる場合は、公式リリースまでしばらくお待ちください。* </font>
 
 - 概要    
 - 1.ステッピングモーターとは  
@@ -203,7 +203,7 @@ for(;;){
 
 1秒の停止をはさみながら色々な速度で色々なステップ数で回転します。  
 
-#### [Example 2](https://www.g200kg.com/demo/chirimen/chirimen-steppingmotor/tutorial/sample2.html)  
+#### [Example 2](https://g200kg.github.io/chirimen-steppingmotor/example2.html)  
 
 ---
 
@@ -218,8 +218,8 @@ setSpeed()の速度の単位は(マイクロステップ数/秒)で、`Math.rand
 
 せっかくなので、このあたりの数値を変えるとモーターがどう動くのかを確認できるサンプルプログラムを準備しましたので試してみてください。動作としてはスライダーで設定した「速度」「加減速レート」をそのまま setSpeed(speed)、setAccelRate(rate)で設定してから move(step) を実行しているだけです。  
 
-#### [Example3](https://www.g200kg.com/demo/chirimen/chirimen-steppingmotor/tutorial/sample3.html)
-[![](images/sample3.png)](https://www.g200kg.com/demo/chirimen/chirimen-steppingmotor/tutorial/sample3.html)
+#### [Example3](https://g200kg.github.io/chirimen-steppingmotor/example3.html)
+[![](images/sample3.png)](https://g200kg.github.io/chirimen-steppingmotor/example3.html)
 
 ##### javascript  
 
