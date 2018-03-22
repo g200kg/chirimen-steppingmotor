@@ -16,7 +16,7 @@
 
 全体の様子は下の写真のようになります。  
 
-![](images/system.jpg)
+![](https://g200kg.github.io/chirimen-steppingmotor/images/system.jpg)
 
 ---
 
@@ -28,7 +28,7 @@
 
 回路図のシンボルでは下の図のようにあらわされ、モーターの軸に対してそれぞれ違う方向にコイルが巻かれています。コイルの中点から線が出ているかどうかで、左のバイポーラ型(4線式)、右のユニポーラ型(6線式)がありますが、今回使用するのはバイポーラ型(4線式)のモーターです。
 
-![](images/steppingmotor.png)
+![](https://g200kg.github.io/chirimen-steppingmotor/images/steppingmotor.png)
 
 通常のモーターでは電圧をかければ勝手に回りますが、ステッピングモーターは電気回路側でどのコイルに電流を流すかを順次切り替えて行く事で、1 ステップずつ回転するという仕組みになっています。
 
@@ -54,7 +54,7 @@
 
 今回作る回路は下の図の通りです。かなり部品が多いですが順番に説明して行きます。
 
-[![](images/schematic640.png)](images/schematic.png)  
+[![](https://g200kg.github.io/chirimen-steppingmotor/images/schematic640.png)](https://g200kg.github.io/chirimen-steppingmotor/images/schematic.png)  
 (クリックで拡大します)  
 
 ### ステッピングモーター
@@ -77,11 +77,11 @@ Arduino には公式の Stepper というステッピングモーター用のラ
 
 今回使用するモータードライバ用のスケッチはこちらの GitHub リポジトリにあります。  
 
-##### [arudino-stepping-motor](https://github.com/g200kg/arduino-stepping-motor)  
+### [GitHub : arudino-stepping-motor](https://github.com/g200kg/arduino-stepping-motor)  
 
 ここから`sketch_steppingmotor.ino` をダウンロードして Arduino に書き込んでください。Arduino への書き込みには Arduino 用の開発環境「Arduino IDE」の準備等が別途必要です。Arduino 関係の情報はネット上にたくさんありますので、 html5experts.jp の以下のページなどを参考にしてスケッチを書き込んでください。  
 
-##### [初心者でもわかる・できる！Arduinoを使った初めての電子工作実践](https://html5experts.jp/youtoy/12029/)
+##### [html5experts.jp : 初心者でもわかる・できる！Arduinoを使った初めての電子工作実践](https://html5experts.jp/youtoy/12029/)
 
 ### I2C 電圧レベル変換モジュール
 
@@ -114,14 +114,14 @@ Raspberry Pi で ターミナルを起動して次のコマンドを入力する
 
 今回の Arduino の I2C スレーブデバイスはスケッチ`arduiono-stepping-motor` で 0x12 と定義されていますので、一覧に `12` が表示されれば Raspberry Pi と Arduino の間の接続は正常です。
 
-![](images/i2cdetect.png)
+![](https://g200kg.github.io/chirimen-steppingmotor/images/i2cdetect.png)
 
 ### モータードライバ、モーターの接続
 では次にモーター側のテストをしましょう。 ターミナルから次のコマンドを入力します。
 
 **`i2cset -y 1 0x12 0x01 1600 w`**
 
-![](images/i2cset.png)
+![](https://g200kg.github.io/chirimen-steppingmotor/images/i2cset.png)
 
 正常であれば、このコマンドでステッピングモーターが 1 回転だけ回って止まるはずです。  
 
@@ -133,12 +133,12 @@ Raspberry Pi で ターミナルを起動して次のコマンドを入力する
 ここまでくれば回路としての動作は大丈夫です。CHIRIMEN の Web アプリから動かしてみましょう。
 ブラウザで次のアドレスにアクセスします。
 
-#### [Example](https://chirimen.org/chirimen-raspi3/gc/i2c/i2c-arduino-steppingMotor)
+#### [chirimen.org : i2c-arduino-steppingMotor Example](https://chirimen.org/chirimen-raspi3/gc/i2c/i2c-arduino-steppingMotor)
 
 ---
 
 下のような画面になり、1秒の停止をはさみながらモーターが 1 回転ずつ正方向逆方向交互に動くはずです。
-![](images/demo640.png)
+![](https://g200kg.github.io/chirimen-steppingmotor/images/demo640.png)
 
 ---
 
@@ -201,7 +201,7 @@ for(;;){
 }
 ```
 
-1秒の停止をはさみながら色々な速度で色々なステップ数で回転します。  
+1秒の停止をはさみながら色々な速度と色々なステップ数で回転します。  
 
 #### [Example 2](https://g200kg.github.io/chirimen-steppingmotor/example2.html)  
 
@@ -216,10 +216,10 @@ setSpeed()の速度の単位は(マイクロステップ数/秒)で、`Math.rand
 
 今回 SteppingMotor オブジェクトでこれに対応するのが setAccelRate(rate) というメソッドです。rate の単位は msec / kHz で、ステップの信号周波数が 1kHz 変化、つまり setSpeed(speed) で設定する速度が 1000 変化するために必要なミリ秒(msec)で指定します。0 を指定した場合は加速減速の処理はされず、いきなり指定の速度で動き始め、いきなり停止します。
 
-せっかくなので、このあたりの数値を変えるとモーターがどう動くのかを確認できるサンプルプログラムを準備しましたので試してみてください。動作としてはスライダーで設定した「速度」「加減速レート」をそのまま setSpeed(speed)、setAccelRate(rate)で設定してから move(step) を実行しているだけです。  
+せっかくなので、このあたりの数値を変えるとモーターがどう動くのかを確認できるサンプルプログラムを準備しましたので試してみてください。動作としてはスライダーで設定した「速度」「加減速レート」「最低速度」をそのまま setSpeed(speed)、setAccelRate(rate)、setMinSpeed(speed)で設定してから move(step) を実行しているだけです。  
 
 #### [Example3](https://g200kg.github.io/chirimen-steppingmotor/example3.html)
-[![](images/sample3.png)](https://g200kg.github.io/chirimen-steppingmotor/example3.html)
+[![](https://g200kg.github.io/chirimen-steppingmotor/images/sample3.png)](https://g200kg.github.io/chirimen-steppingmotor/example3.html)
 
 ##### javascript  
 
@@ -228,6 +228,7 @@ window.addEventListener('load', async ()=>{
   let steps=1600;
   let speed=1600;
   let accel=10;
+  let minspeed=800;
   const head = document.querySelector('#head');
   const i2cAccess = await navigator.requestI2CAccess();
   const port = i2cAccess.ports.get(1);
@@ -235,6 +236,7 @@ window.addEventListener('load', async ()=>{
   await steppingMotor.init();
   document.getElementById("run").addEventListener("click",async ()=>{
     await steppingMotor.setSpeed(speed);
+    await steppingMotor.setMinSpeed(minspeed);
     await steppingMotor.setAccelRate(accel);
     head.innerHTML="MOVE";
     await steppingMotor.move(steps);
@@ -249,19 +251,23 @@ window.addEventListener('load', async ()=>{
   document.getElementById("accel").addEventListener("input",()=>{
     document.getElementById("accelval").innerHTML=accel=event.target.value;
   });
+  document.getElementById("minspeed").addEventListener("input",()=>{
+    document.getElementById("minspeedval").innerHTML=minspeed=event.target.value;
+  });
 }, false);
 ```
 
 ##### HTML  
 
 ```html
-  <div>モーターの状態 : <span id="head">STOP</span></div>
-  <table>
-    <tr><td>ステップ</td><td><input type="range" id="steps" min="-16000" max="16000" value="1600"/></td><td id="stepsval">1600</td></tr>
-    <tr><td>速度</td><td><input type="range" id="speed" min="0" max="16000" value="1600"/></td><td id="speedval">1600</td></tr>
-    <tr><td>加減速</td><td><input type="range" id="accel" min="0" max="1000" value="100"/></td><td id="accelval">100</td></tr>
-  </table>
-  <button id="run">Run</button>
+<div>モーターの状態 : <span id="head">STOP</span></div>
+<table>
+  <tr><td>ステップ</td><td><input type="range" id="steps" min="-16000" max="16000" value="1600"/></td><td id="stepsval">1600</td></tr>
+  <tr><td>速度</td><td><input type="range" id="speed" min="0" max="10000" value="1600"/></td><td id="speedval">1600</td></tr>
+  <tr><td>加減速</td><td><input type="range" id="accel" min="0" max="1000" value="100"/></td><td id="accelval">100</td></tr>
+  <tr><td>最低速度</td><td><input type="range" id="minspeed" min="0" max="1600" value="800"/></td><td id="minspeedval">800</td></tr>
+</table>
+<button id="run">Run</button>
 ```
 
 
@@ -283,4 +289,4 @@ window.addEventListener('load', async ()=>{
 - [CHIRIMEN for Raspberry Pi 3 チュートリアル 3. I2C　応用編（その他のセンサー）](https://qiita.com/tadfmac/items/b17d8c6a35b31c495a36)
 - [CHIRIMEN for Raspberry Pi 3 チュートリアル 4. GPIO/I2C編　まとめ](https://qiita.com/tadfmac/items/d627f8d2fec3c5f8711b)
 - [CHIRIMEN for Raspberry Pi 3 チュートリアル 5. WebBluetooth編](https://qiita.com/g200kg/items/28b3cc8c058bb49673a2)
-- [CHIRIMEN for Raspberry Pi 3 チュートリアル 6. ステッピングモーター編](#)
+- [CHIRIMEN for Raspberry Pi 3 チュートリアル 6. ステッピングモーター編](https://qiita.com/g200kg/items/cfb737c07b9b6edced3e)
