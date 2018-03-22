@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://chirimen.org/chirimen-raspi3/release/cdn/polyfill.js"></script>
+<!--<script src="http://chirimen.org/chirimen-raspi3/release/cdn/i2c-arduino-steppingMotor.js"></script>-->
+<script src="https://www.g200kg.com/demo/chirimen/gc/drivers/i2c-arduino-steppingMotor.js"></script>
+
+<script>
+'use strict';
+
+window.addEventListener('load', async ()=>{
+  let steps=1600;
+  let speed=1600;
+  let accel=10;
+  let minspeed=800;
+  const head = document.querySelector('#head');
+  const i2cAccess = await navigator.requestI2CAccess();
+  const port = i2cAccess.ports.get(1);
+  const steppingMotor = new SteppingMotor(port,0x12);
+  await steppingMotor.init();
+  document.getElementById("run").addEventListener("click",async ()=>{
+    await steppingMotor.setSpeed(speed);
+    await steppingMotor.setMinSpeed(minspeed);
+    await steppingMotor.setAccelRate(accel);
+    head.innerHTML="MOVE";
+    await steppingMotor.move(steps);
+    head.innerHTML="STOP";
+  });
+  document.getElementById("steps").addEventListener("input",()=>{
+    document.getElementById("stepsval").innerHTML=steps=event.target.value;
+  });
+  document.getElementById("speed").addEventListener("input",()=>{
+    document.getElementById("speedval").innerHTML=speed=event.target.value;
+  });
+  document.getElementById("accel").addEventListener("input",()=>{
+    document.getElementById("accelval").innerHTML=accel=event.target.value;
+  });
+  document.getElementById("minspeed").addEventListener("input",()=>{
+    document.getElementById("minspeedval").innerHTML=minspeed=event.target.value;
+  });
+}, false);
+</script>
+</head>
+<body>
+  <div>モーターの状態 : <span id="head">STOP</span></div>
+  <table>
+    <tr><td>ステップ</td><td><input type="range" id="steps" min="-16000" max="16000" value="1600"/></td><td id="stepsval">1600</td></tr>
+    <tr><td>速度</td><td><input type="range" id="speed" min="0" max="10000" value="1600"/></td><td id="speedval">1600</td></tr>
+    <tr><td>加減速</td><td><input type="range" id="accel" min="0" max="1000" value="100"/></td><td id="accelval">100</td></tr>
+    <tr><td>最低速度</td><td><input type="range" id="minspeed" min="0" max="1600" value="800"/></td><td id="minspeedval">800</td></tr>
+  </table>
+  <button id="run">Run</button>
+</body>
+</html>
